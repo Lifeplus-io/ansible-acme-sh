@@ -279,6 +279,8 @@ acme_sh_domains:
 #    extra_issue_renew_hook: ""
 #    # Optionally remove and disable the certificate.
 #    remove: True
+#    # Optionnaly call a deploy_hook see : https://github.com/acmesh-official/acme.sh/wiki/deployhooks
+#    deploy_hook: ""
 ```
 
 ## Example usage
