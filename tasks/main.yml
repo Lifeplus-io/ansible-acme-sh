@@ -229,9 +229,11 @@
   loop: "{{ acme_sh_domains }}"
   loop_control:
     index_var: domains_index
+  environment: "{{ item.deploy_env_vars | default(acme_sh_default_deploy_env_vars) }}"
   when:
     - acme_sh_domains and item.domains is defined and item.domains
     - item.deploy_hook is defined and item.deploy_hook
+    - item.deploy_env_vars | default(acme_sh_default_deploy_env_vars)
     - item.custom_command is undefined or not item.custom_command
     - item.remove is undefined or not item.remove
     - not acme_sh_uninstall

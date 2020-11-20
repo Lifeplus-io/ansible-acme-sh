@@ -36,7 +36,10 @@ acme_sh_default_extra_flags_renew: ""
 acme_sh_default_extra_flags_install_cert: ""
 acme_sh_default_extra_flags_deploy_cert: ""
 
+acme_sh_default_deploy_env_vars: {}
+
 acme_sh_default_install_cert_reloadcmd: "sudo service nginx reload"
+
 
 acme_sh_default_issue_pre_hook: ""
 acme_sh_default_issue_post_hook: ""
