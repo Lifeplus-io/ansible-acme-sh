@@ -210,7 +210,7 @@
   when:
     - acme_sh_domains and item.domains is defined and item.domains
     - item.custom_command is undefined or not item.custom_command
-    - item.deploy_hook is undefined or not item.deploy_hook
+    - item.deploy_hook is undefined or not item.deploy_hook or acme_sh_default_deploy_hook
     - item.remove is undefined or not item.remove
     - not acme_sh_uninstall
   become_user: "{{ acme_sh_become_user }}"
@@ -221,7 +221,7 @@
 - name: Deploy acme.sh certificate(s)
   command: >-
     ./acme.sh --deploy -d {{ item.domains | first }}
-    --deploy-hook {{ item.deploy_hook }}
+    --deploy-hook {{ item.deploy_hook | default(acme_sh_default_deploy_hook)}}
     {{ "--debug" if item.debug | default(acme_sh_default_debug) else "" }}
     {{ item.extra_flags_deploy_cert | default(acme_sh_default_extra_flags_deploy_cert) }}
   args:
@@ -232,7 +232,7 @@
   environment: "{{ item.deploy_env_vars | default(acme_sh_default_deploy_env_vars) }}"
   when:
     - acme_sh_domains and item.domains is defined and item.domains
-    - item.deploy_hook is defined and item.deploy_hook
+    - (item.deploy_hook is defined and item.deploy_hook) or acme_sh_default_deploy_hook
     - item.deploy_env_vars | default(acme_sh_default_deploy_env_vars)
     - item.custom_command is undefined or not item.custom_command
     - item.remove is undefined or not item.remove

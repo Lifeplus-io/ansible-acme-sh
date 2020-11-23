@@ -178,6 +178,11 @@ acme_sh_default_dns_provider_api_keys: {}
 #       "DEPLOY_HAPROXY_RELOAD":"/usr/sbin/service haproxy restart"
 acme_sh_default_deploy_env_vars: {}
 
+# When deploying certificates (see : https://github.com/acmesh-official/acme.sh/wiki/deployhooks)  
+# you can pass a default 'deploy-hook' for all the domains.
+# If needed you can ovveride this default hook at domains definition level
+acme_sh_default_deploy_hook: ""
+
 # How long should acme.sh sleep after attempting to set the TXT record to your
 # DNS records? Some DNS providers do not update as fast as others.
 #
